@@ -1,0 +1,51 @@
+---
+import { SITE } from '../config';
+
+const year = new Date().getFullYear();
+const groups = [
+  {
+    title: 'Tools',
+    links: [
+      { href: '/?mode=anagram#tool', label: 'Anagram Generator' },
+      { href: '/?mode=words#tool', label: 'Word Finder' },
+      { href: '/?mode=pair#tool', label: 'Anagram Checker' },
+    ],
+  },
+  {
+    title: 'Learn',
+    links: [
+      { href: '/#features', label: 'Features' },
+      { href: '/#faq', label: 'FAQ' },
+      { href: '/about', label: 'Dictionary & Method' },
+    ],
+  },
+];
+---
+
+<footer class="border-t border-hairline">
+  <div class="mx-auto grid max-w-300 gap-10 px-4 py-16 sm:grid-cols-[1.5fr_1fr_1fr] sm:px-6">
+    <div>
+      <p class="text-[15px] font-semibold tracking-tight text-ink" translate="no">{SITE.name}</p>
+      <p class="mt-2 max-w-xs text-sm text-body">{SITE.tagline} Fast, private and free, with no sign-up.</p>
+    </div>
+    {
+      groups.map((g) => (
+        <nav aria-label={g.title}>
+          <p class="eyebrow">{g.title}</p>
+          <ul class="mt-3 space-y-2 text-sm">
+            {g.links.map((l) => (
+              <li>
+                <a href={l.href} class="text-body transition-colors hover:text-ink">{l.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ))
+    }
+  </div>
+  <div class="border-t border-hairline">
+    <p class="mx-auto max-w-300 px-4 py-6 text-xs text-mute sm:px-6">
+      © {year} <span translate="no">{SITE.name}</span>. Your text never leaves your browser.
+    </p>
+  </div>
+</footer>

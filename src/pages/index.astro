@@ -1,11 +1,37 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Tool from '../components/Tool.astro';
+import Features from '../components/Features.astro';
+import Faq from '../components/Faq.astro';
 ---
 
 <Layout>
-	<Welcome />
+  <section class="relative isolate overflow-hidden">
+    <div class="mesh pointer-events-none absolute inset-x-0 top-0 -z-10 h-[34rem]" aria-hidden="true"></div>
+    <div class="mx-auto max-w-300 px-4 pt-16 pb-16 sm:px-6 md:pt-24 md:pb-24">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="eyebrow">Anagram Generator &amp; Word Finder</p>
+        <h1 class="display-xl mt-4">Rearrange any phrase into something new.</h1>
+        <p class="mx-auto mt-5 max-w-xl text-base leading-6 text-body">
+          Type a word, a name or a whole sentence. Get clean multi-word anagrams instantly, with the filters, sharing and export that other generators leave out.
+        </p>
+      </div>
+      <div class="mx-auto mt-12 max-w-3xl">
+        <Tool />
+      </div>
+    </div>
+  </section>
+
+  <Features />
+  <Faq />
+
+  <section class="border-t border-hairline">
+    <div class="mx-auto max-w-300 px-4 py-24 text-center sm:px-6">
+      <h2 class="display-xl !text-4xl sm:!text-5xl">Ready to shuffle some letters?</h2>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a href="/#tool" class="pill">Start Generating</a>
+        <a href="/about" class="pill pill-secondary">How It Works</a>
+      </div>
+    </div>
+  </section>
 </Layout>

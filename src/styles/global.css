@@ -1,0 +1,157 @@
+@import "tailwindcss";
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/geist-mono";
+
+/* Keep agent skill docs and dictionary data out of class detection. */
+@source not "../../.claude";
+@source not "../../.agents";
+@source not "../../public";
+@source not "../../scripts";
+
+/* Design tokens: see DESIGN.md (Vercel / Geist). */
+@theme {
+  --font-sans: "Geist Variable", Arial, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-ink: #171717;
+  --color-body: #4d4d4d;
+  --color-mute: #8f8f8f;
+  --color-faint: #a1a1a1;
+  --color-hairline: #ebebeb;
+  --color-hairline-soft: #f2f2f2;
+  --color-canvas: #fafafa;
+  --color-surface: #ffffff;
+  --color-link: #0070f3;
+  --color-link-deep: #0761d1;
+  --color-link-soft: #d3e5ff;
+  --color-error: #ee0000;
+  --color-warning: #f5a623;
+  --color-warning-soft: #ffefcf;
+  --color-warning-deep: #ab570a;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  --shadow-whisper: 0 1px 1px rgb(0 0 0 / 0.04);
+  --shadow-float: 0 2px 2px rgb(0 0 0 / 0.04), 0 8px 16px -4px rgb(0 0 0 / 0.08);
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-canvas font-sans text-body antialiased;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-link);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: var(--color-link-soft);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-mute);
+}
+
+@utility display-xl {
+  font-size: clamp(2.25rem, 6vw + 0.5rem, 3.75rem);
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  color: var(--color-ink);
+  text-wrap: balance;
+}
+
+@utility heading-lg {
+  font-size: clamp(1.625rem, 2.5vw + 0.5rem, 2rem);
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  color: var(--color-ink);
+  text-wrap: balance;
+}
+
+@utility heading-md {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+
+@layer components {
+  /* App chrome: tight 6px squares. */
+  .btn {
+    @apply inline-flex h-9 items-center justify-center gap-1.5 rounded-sm border border-hairline bg-surface px-3 text-sm font-medium whitespace-nowrap text-ink transition-colors hover:bg-hairline-soft disabled:pointer-events-none disabled:opacity-50 pointer-coarse:h-11;
+  }
+  .btn-primary {
+    @apply border-ink bg-ink text-surface hover:bg-[#383838];
+  }
+  .btn-icon {
+    @apply size-8 shrink-0 px-0 pointer-coarse:size-11;
+  }
+  /* Marketing CTAs: fully rounded pills. */
+  .pill {
+    @apply inline-flex h-11 items-center justify-center rounded-full border border-ink bg-ink px-5 text-base font-medium text-surface transition-colors hover:bg-[#383838];
+  }
+  .pill-secondary {
+    @apply border-hairline bg-surface text-ink hover:bg-hairline-soft;
+  }
+  .tab-pill {
+    @apply inline-flex h-9 items-center rounded-full border border-hairline bg-surface px-4 text-sm font-medium text-ink transition-colors hover:bg-hairline-soft aria-selected:border-ink aria-selected:bg-ink aria-selected:text-surface pointer-coarse:h-11;
+  }
+  .field {
+    @apply h-9 w-full rounded-sm border border-hairline bg-surface px-3 text-sm text-ink placeholder:text-faint pointer-coarse:h-11 pointer-coarse:text-base;
+  }
+  .card {
+    @apply rounded-md border border-hairline bg-surface;
+  }
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-ink;
+  }
+  .hint {
+    @apply mt-1 text-xs text-mute;
+  }
+}
+
+/* The mesh gradient is the only decorative flourish; it lives in the hero. */
+.mesh {
+  background:
+    radial-gradient(38% 55% at 14% 38%, rgb(0 124 240 / 0.34), transparent 70%),
+    radial-gradient(34% 48% at 40% 12%, rgb(121 40 202 / 0.26), transparent 70%),
+    radial-gradient(34% 48% at 68% 34%, rgb(255 0 128 / 0.22), transparent 70%),
+    radial-gradient(38% 52% at 90% 12%, rgb(249 203 40 / 0.34), transparent 70%),
+    radial-gradient(40% 44% at 30% 70%, rgb(80 227 194 / 0.34), transparent 70%);
+  filter: blur(36px);
+  mask-image: linear-gradient(to bottom, #000 35%, transparent 100%);
+}
+
+.tile {
+  font-family: var(--font-mono);
+  @apply inline-flex size-9 items-center justify-center rounded-sm border border-hairline bg-surface text-base font-medium text-ink uppercase shadow-whisper;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+button[aria-pressed="true"] svg {
+  fill: currentColor;
+}

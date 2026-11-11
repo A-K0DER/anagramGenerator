@@ -1,0 +1,52 @@
+---
+const features = [
+  {
+    tag: '01 / Private',
+    title: 'Instant and private',
+    body: 'The whole dictionary runs in your browser. Results appear as you type, and your text is never uploaded or logged.',
+  },
+  {
+    tag: '02 / Control',
+    title: 'Filters that make sense',
+    body: 'Set min and max words, minimum word length and a result cap. Force words in with Must Include, or ban them with Never Include. Every option explains itself.',
+  },
+  {
+    tag: '03 / Quality',
+    title: 'Natural-sounding results',
+    body: 'Common-words mode favors everyday vocabulary and puts the shortest anagrams first. Switch it off to search all 274,000 words.',
+  },
+  {
+    tag: '04 / Word Finder',
+    title: 'Find words, not just anagrams',
+    body: 'List every word you can make from a set of letters, or every word that contains them, filtered by starting and ending letters.',
+  },
+  {
+    tag: '05 / Share',
+    title: 'Copy, share and export',
+    body: 'Copy a single result or all of them, download TXT or CSV, or send a link that reopens the exact search with every option intact.',
+  },
+  {
+    tag: '06 / Memory',
+    title: 'History and favorites',
+    body: 'Recent searches and starred anagrams are saved on your device only, so a great find is one click away tomorrow.',
+  },
+];
+---
+
+<section id="features" class="scroll-mt-20 border-t border-hairline">
+  <div class="mx-auto max-w-300 px-4 py-24 sm:px-6 md:py-32">
+    <p class="eyebrow">Features</p>
+    <h2 class="heading-lg mt-3 max-w-xl">Everything you need to play with letters.</h2>
+    <ul class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        features.map((f) => (
+          <li class="card p-6">
+            <p class="eyebrow">{f.tag}</p>
+            <h3 class="heading-md mt-4">{f.title}</h3>
+            <p class="mt-2 text-sm leading-5 text-body">{f.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

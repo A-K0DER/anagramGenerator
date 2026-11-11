@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const stats = [
+  { label: 'Dictionary words', value: '274,041' },
+  { label: 'Common words', value: '15,456' },
+  { label: 'Language', value: 'English' },
+  { label: 'Processing', value: 'In your browser' },
+];
+---
+
+<Layout title="Dictionary & Method" description="How the anagram generator works, which dictionaries it uses, and how your privacy is protected.">
+  <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6 md:py-24">
+    <p class="eyebrow">About</p>
+    <h1 class="display-xl mt-3 !text-4xl sm:!text-5xl">Dictionary &amp; method</h1>
+    <p class="mt-5 text-base leading-6 text-body">
+      Everything runs on your device. This page explains what powers the results, so you can judge them.
+    </p>
+
+    <dl class="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4">
+      {
+        stats.map((s) => (
+          <div class="card p-4">
+            <dt class="eyebrow">{s.label}</dt>
+            <dd class="mt-2 text-lg font-semibold tracking-tight text-ink tabular-nums">{s.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    <div class="mt-12 space-y-10">
+      <section>
+        <h2 class="heading-md">Dictionaries</h2>
+        <p class="mt-2 text-sm leading-6 text-body">
+          The full list comes from the open-source <a class="text-link underline-offset-2 hover:underline" href="https://github.com/sindresorhus/word-list">word-list</a> package. Short words are trimmed to a standard set to avoid filler results. “Common words only” intersects that list with the 20,000 most frequent English words from the <a class="text-link underline-offset-2 hover:underline" href="https://github.com/first20hours/google-10000-english">google-10000-english</a> project.
+        </p>
+      </section>
+      <section>
+        <h2 class="heading-md">Method</h2>
+        <p class="mt-2 text-sm leading-6 text-body">
+          Your letters are counted, every word that fits is collected, and a depth-first search combines words until all letters are used. Words are chosen in a fixed order, so each combination appears once. Results are sorted by fewest words, then longest first word.
+        </p>
+      </section>
+      <section>
+        <h2 class="heading-md">Privacy</h2>
+        <p class="mt-2 text-sm leading-6 text-body">
+          The dictionary downloads once and is cached by your browser. Searches never leave the page. History and favorites live in local storage and can be cleared at any time.
+        </p>
+      </section>
+    </div>
+  </div>
+</Layout>

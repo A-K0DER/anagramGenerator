@@ -1,0 +1,167 @@
+---
+const modes = [
+  { id: 'anagram', label: 'Anagram Generator' },
+  { id: 'words', label: 'Word Finder' },
+  { id: 'pair', label: 'Anagram Checker' },
+];
+---
+
+<section id="tool" data-tool class="scroll-mt-20">
+  <div class="card overflow-hidden shadow-float">
+    <div class="border-b border-hairline p-4 sm:p-6">
+      <div role="tablist" aria-label="Tool mode" class="flex flex-wrap gap-2">
+        {
+          modes.map((m, i) => (
+            <button type="button" role="tab" class="tab-pill" id={`tab-${m.id}`} data-mode={m.id} aria-selected={i === 0} aria-controls="tool-panel">
+              {m.label}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+
+    <form data-form novalidate autocomplete="off" id="tool-panel" role="tabpanel" aria-labelledby="tab-anagram" class="space-y-5 p-4 sm:p-6">
+      <div>
+        <label for="q" class="label" data-label-q>Your word or phrase</label>
+        <input
+          id="q"
+          name="q"
+          type="text"
+          class="field !h-12 !text-base sm:!text-lg"
+          placeholder="Try “dormitory” or “Clint Eastwood”…"
+          autocapitalize="off"
+          autocomplete="off"
+          spellcheck="false"
+          maxlength="60"
+          enterkeyhint="go"
+        />
+        <p class="hint" data-hint-q>
+          Letters only; spaces and punctuation are ignored. Press <kbd class="font-mono">/</kbd> anywhere to focus.
+        </p>
+      </div>
+
+      <div data-modes="pair" hidden>
+        <label for="b" class="label">Second phrase</label>
+        <input id="b" name="b" type="text" class="field !h-12 !text-base sm:!text-lg" placeholder="dirty room…" autocapitalize="off" autocomplete="off" spellcheck="false" maxlength="60" />
+      </div>
+
+      <div class="flex min-h-9 flex-wrap items-center gap-3" data-modes="anagram words">
+        <div class="flex flex-wrap gap-1.5" data-tiles aria-hidden="true"></div>
+        <span class="font-mono text-xs text-mute tabular-nums" data-count></span>
+        <button type="button" class="btn ml-auto" data-shuffle hidden>Shuffle Tiles</button>
+      </div>
+
+      <details class="group rounded-md border border-hairline bg-canvas" data-options data-modes="anagram words">
+        <summary class="flex cursor-pointer items-center justify-between rounded-md px-4 py-3 text-sm font-medium text-ink select-none">
+          Options
+          <svg viewBox="0 0 24 24" class="size-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+        </summary>
+        <div class="grid gap-4 border-t border-hairline p-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div data-modes="anagram">
+            <label for="minw" class="label">Min Words</label>
+            <input id="minw" name="minw" type="number" inputmode="numeric" min="1" max="10" value="1" class="field tabular-nums" />
+            <p class="hint">Fewest words per anagram.</p>
+          </div>
+          <div data-modes="anagram">
+            <label for="maxw" class="label">Max Words</label>
+            <input id="maxw" name="maxw" type="number" inputmode="numeric" min="1" max="10" value="4" class="field tabular-nums" />
+            <p class="hint">Keep low for natural results.</p>
+          </div>
+          <div data-modes="anagram">
+            <label for="minl" class="label">Min Word Length</label>
+            <input id="minl" name="minl" type="number" inputmode="numeric" min="1" max="10" value="2" class="field tabular-nums" />
+            <p class="hint">Hide tiny filler words.</p>
+          </div>
+          <div data-modes="anagram">
+            <label for="max" class="label">Max Results</label>
+            <input id="max" name="max" type="number" inputmode="numeric" min="10" max="1000" step="10" value="200" class="field tabular-nums" />
+            <p class="hint">Up to 1,000.</p>
+          </div>
+          <div data-modes="anagram">
+            <label for="inc" class="label">Must Include</label>
+            <input id="inc" name="inc" type="text" class="field" placeholder="e.g. love, you" spellcheck="false" autocapitalize="off" />
+            <p class="hint">Comma-separated words every anagram uses.</p>
+          </div>
+          <div data-modes="anagram">
+            <label for="exc" class="label">Never Include</label>
+            <input id="exc" name="exc" type="text" class="field" placeholder="e.g. ass, rot" spellcheck="false" autocapitalize="off" />
+            <p class="hint">Comma-separated words to leave out.</p>
+          </div>
+          <div data-modes="words" hidden>
+            <label for="scope" class="label">Find Words That</label>
+            <select id="scope" name="scope" class="field">
+              <option value="within">Can be made from my letters</option>
+              <option value="containing">Contain all my letters</option>
+            </select>
+          </div>
+          <div data-modes="words" hidden>
+            <label for="sw" class="label">Starts With</label>
+            <input id="sw" name="sw" type="text" class="field" spellcheck="false" autocapitalize="off" maxlength="12" />
+          </div>
+          <div data-modes="words" hidden>
+            <label for="ew" class="label">Ends With</label>
+            <input id="ew" name="ew" type="text" class="field" spellcheck="false" autocapitalize="off" maxlength="12" />
+          </div>
+          <div class="sm:col-span-2 lg:col-span-3">
+            <label class="flex min-h-9 items-start gap-2.5 text-sm text-ink">
+              <input type="checkbox" name="common" checked class="mt-0.5 size-4 accent-ink" />
+              <span>
+                Common words only
+                <span class="hint !mt-0 block">Off searches the full 274,000-word dictionary, including rare and obscure words.</span>
+              </span>
+            </label>
+          </div>
+        </div>
+      </details>
+
+      <div class="flex flex-wrap items-center gap-2">
+        <button type="submit" class="btn btn-primary" data-submit>Generate</button>
+        <button type="button" class="btn" data-clear>Clear</button>
+      </div>
+    </form>
+
+    <div class="border-t border-hairline" data-output hidden>
+      <div class="flex flex-wrap items-center gap-2 px-4 py-3 sm:px-6">
+        <p class="mr-auto text-sm text-body" data-status role="status" aria-live="polite"></p>
+        <div class="flex flex-wrap items-center gap-2" data-toolbar hidden>
+          <label for="sort" class="sr-only">Sort results</label>
+          <select id="sort" class="field !h-8 !w-auto pointer-coarse:!h-11" data-sort>
+            <option value="words">Fewest words</option>
+            <option value="alpha">Alphabetical</option>
+          </select>
+          <button type="button" class="btn" data-action="copy">Copy All</button>
+          <button type="button" class="btn" data-action="txt">Download .txt</button>
+          <button type="button" class="btn" data-action="csv">Download .csv</button>
+          <button type="button" class="btn" data-action="share">Copy Link</button>
+        </div>
+      </div>
+      <div data-results class="max-h-[34rem] overflow-y-auto overscroll-contain border-t border-hairline"></div>
+      <div class="border-t border-hairline p-3 text-center" data-more-wrap hidden>
+        <button type="button" class="btn" data-more>Show More</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4 grid gap-4 md:grid-cols-2" data-saved>
+    <div class="card p-4 sm:p-5">
+      <div class="flex items-center justify-between">
+        <h2 class="text-sm font-semibold text-ink">Recent Searches</h2>
+        <button type="button" class="text-xs text-mute underline-offset-2 hover:text-ink hover:underline" data-clear-history hidden>Clear</button>
+      </div>
+      <ul class="mt-3 flex flex-wrap gap-2" data-history></ul>
+      <p class="text-sm text-mute" data-history-empty>Your searches appear here. They stay on this device.</p>
+    </div>
+    <div class="card p-4 sm:p-5">
+      <div class="flex items-center justify-between">
+        <h2 class="text-sm font-semibold text-ink">Favorites</h2>
+        <button type="button" class="text-xs text-mute underline-offset-2 hover:text-ink hover:underline" data-clear-favorites hidden>Clear</button>
+      </div>
+      <ul class="mt-3 flex flex-wrap gap-2" data-favorites></ul>
+      <p class="text-sm text-mute" data-favorites-empty>Star any result to keep it here.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '../scripts/tool';
+</script>

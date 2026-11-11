@@ -1,0 +1,36 @@
+---
+import { SITE } from '../config';
+
+const path = Astro.url.pathname;
+const links = [
+  { href: '/#tool', label: 'Generator' },
+  { href: '/#features', label: 'Features' },
+  { href: '/#faq', label: 'FAQ' },
+  { href: '/about', label: 'About' },
+];
+---
+
+<header class="sticky top-0 z-40 border-b border-hairline bg-canvas/85 backdrop-blur">
+  <div class="mx-auto flex h-14 max-w-300 items-center justify-between gap-4 px-4 sm:px-6">
+    <a href="/" class="flex items-center gap-2 text-[15px] font-semibold tracking-tight text-ink" translate="no">
+      <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 8h13m0 0-3.5-3.5M17 8l-3.5 3.5M20 16H7m0 0 3.5-3.5M7 16l3.5 3.5"></path>
+      </svg>
+      {SITE.name}
+    </a>
+    <nav aria-label="Primary" class="flex items-center gap-1">
+      {
+        links.map((l) => (
+          <a
+            href={l.href}
+            aria-current={path === l.href ? 'page' : undefined}
+            class="hidden rounded-full px-3 py-2 text-sm text-body transition-colors hover:bg-hairline-soft hover:text-ink aria-[current=page]:text-ink sm:inline-block"
+          >
+            {l.label}
+          </a>
+        ))
+      }
+      <a href="/#tool" class="btn btn-primary ml-1">Try It Free</a>
+    </nav>
+  </div>
+</header>
