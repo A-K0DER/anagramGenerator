@@ -13,6 +13,7 @@ export const SITE = {
 };
 
 export const ALTERNATIVES = [
+  { name: 'Inge’s Anagram Generator', href: 'https://ingesanagram.com/' },
   { name: 'Internet Anagram Server', href: 'https://wordsmith.org/anagram/' },
   { name: 'Dictionary.com Anagram Solver', href: 'https://www.dictionary.com/e/word-tools/anagram-solver/' },
   { name: 'Thesaurus.com Anagram Solver', href: 'https://www.thesaurus.com/anagram-solver' },
