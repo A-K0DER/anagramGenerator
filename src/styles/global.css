@@ -3,6 +3,8 @@
 @import "@fontsource-variable/newsreader";
 @import "@fontsource-variable/geist-mono";
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 /* Keep agent skill docs and dictionary data out of class detection. */
 @source not "../../.claude";
 @source not "../../.agents";
@@ -41,8 +43,28 @@
   --radius-md: 14px;
   --radius-lg: 20px;
 
-  --shadow-whisper: 0 2px 0 rgb(27 19 64 / 0.9);
-  --shadow-float: 0 4px 0 rgb(27 19 64 / 0.9), 0 12px 24px -8px rgb(27 19 64 / 0.25);
+  --shadow-whisper: 0 2px 0 var(--color-ink);
+  --shadow-float: 0 4px 0 var(--color-ink), 0 12px 24px -8px rgb(0 0 0 / 0.25);
+}
+
+/* Dark mode: follows the OS unless the user picked a theme via the header toggle. */
+@layer base {
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --color-ink: #fdf3dc;
+    --color-body: #cfc8e6;
+    --color-mute: #a198c4;
+    --color-faint: #7f77a3;
+    --color-hairline: #3a3266;
+    --color-hairline-soft: #2a2350;
+    --color-canvas: #14102b;
+    --color-surface: #1f1a3d;
+    --color-link: #e8392b;
+    --color-link-deep: #c42a1d;
+    --color-warning-soft: #3d3320;
+    --color-warning-deep: #ffd27a;
+    --color-ink-hover: #ffe6a8;
+  }
 }
 
 @layer base {
@@ -130,7 +152,7 @@
     @apply border-hairline bg-surface text-ink hover:bg-warning-soft;
   }
   .tab-pill {
-    @apply inline-flex h-9 items-center rounded-full border border-hairline bg-surface px-4 text-sm font-medium text-ink transition-colors hover:bg-warning-soft aria-selected:border-ink aria-selected:bg-sun aria-selected:text-ink pointer-coarse:h-11;
+    @apply inline-flex h-9 items-center rounded-full border border-hairline bg-surface px-4 text-sm font-medium text-ink transition-colors hover:bg-warning-soft aria-selected:border-ink aria-selected:bg-sun aria-selected:text-[#1b1340] pointer-coarse:h-11;
   }
   .field {
     @apply h-9 w-full rounded-sm border border-hairline bg-surface px-3 text-sm text-ink placeholder:text-faint pointer-coarse:h-11 pointer-coarse:text-base;
@@ -148,6 +170,7 @@
 
 /* The mesh gradient is the only decorative flourish; it lives in the hero. */
 .mesh {
+  opacity: var(--mesh-opacity, 1);
   background:
     radial-gradient(34% 50% at 12% 30%, rgb(255 184 0 / 0.55), transparent 70%),
     radial-gradient(32% 48% at 42% 10%, rgb(232 57 43 / 0.35), transparent 70%),
@@ -161,8 +184,9 @@
 /* Scrabble-style letter tiles, cycling through the palette. */
 .tile {
   font-family: var(--font-display);
+  color: #1b1340;
   --tile: var(--color-sun);
-  @apply inline-flex size-10 items-center justify-center rounded-sm border-2 border-ink text-xl font-bold text-ink uppercase;
+  @apply inline-flex size-10 items-center justify-center rounded-sm border-2 border-ink text-xl font-bold uppercase;
   background: var(--tile);
   box-shadow: 0 3px 0 var(--color-ink);
 }
@@ -170,6 +194,10 @@
 .tile:nth-child(5n + 3) { --tile: #9ff0dd; }
 .tile:nth-child(5n + 4) { --tile: #d9b8ff; }
 .tile:nth-child(5n + 5) { --tile: #b3ccff; }
+
+[data-theme="dark"] .mesh {
+  --mesh-opacity: 0.45;
+}
 
 summary::-webkit-details-marker {
   display: none;
