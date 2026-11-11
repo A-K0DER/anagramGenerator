@@ -8,6 +8,5 @@ export const SITE = {
     'Free anagram solver and anagram generator. Enter any word or phrase and find every anagram instantly. Anagram maker, finder and creator with filters, export and no sign-up.',
   keywords:
     'anagram solver, anagram, anagram generator, anagram definition, what is an anagram, anagram maker, anagram finder, anagram creator, anagrams solver, anagrams cheat',
-  // Domain not decided yet: set this once it is, to enable canonical and OG URLs.
-  url: undefined as string | undefined,
+  url: 'https://theanagramgenerator.com',
 };
