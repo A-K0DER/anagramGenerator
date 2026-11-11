@@ -9,6 +9,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "deploy": "astro build && npx wrangler deploy",
     "astro": "astro",
     "build:dict": "node scripts/build-dictionary.mjs"
   },
