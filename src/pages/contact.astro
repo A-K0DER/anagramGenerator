@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../config';
+
+const topics = [
+  { title: 'Feedback & ideas', body: 'Suggest a feature or tell us what would make the tool better.' },
+  { title: 'Word list issues', body: 'Found a missing word, an odd result or an offensive entry? Send the word and we will review it.' },
+  { title: 'Bugs', body: 'Include your browser, device and the text you entered so we can reproduce the problem.' },
+];
+---
+
+<Layout title="Contact Us" description="Contact anagramGenerator with feedback, bug reports, word list corrections or general questions.">
+  <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6 md:py-24">
+    <p class="eyebrow">Contact</p>
+    <h1 class="display-xl mt-3 !text-4xl sm:!text-5xl">Contact us</h1>
+    <p class="mt-5 text-base leading-6 text-body">
+      We read every message. The quickest way to reach us is by email, and we usually reply within a few days.
+    </p>
+
+    <div class="card mt-10 p-6">
+      <p class="eyebrow">Email</p>
+      <p class="mt-2 text-lg font-semibold tracking-tight text-ink">
+        <a class="text-link underline-offset-2 hover:underline" href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>
+      </p>
+      <div class="mt-5">
+        <a href={`mailto:${SITE.contactEmail}?subject=${encodeURIComponent(`${SITE.name} feedback`)}`} class="pill">Send an email</a>
+      </div>
+    </div>
+
+    <div class="mt-12 space-y-10">
+      <section>
+        <h2 class="heading-md">What to write to us about</h2>
+        <ul class="mt-3 grid gap-4 sm:grid-cols-3">
+          {
+            topics.map((t) => (
+              <li class="card p-4">
+                <h3 class="text-sm font-semibold text-ink">{t.title}</h3>
+                <p class="mt-2 text-sm leading-6 text-body">{t.body}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+      <section>
+        <h2 class="heading-md">Before you write</h2>
+        <p class="mt-2 text-sm leading-6 text-body">
+          Your answer may already be in the <a class="text-link underline-offset-2 hover:underline" href="/#faq">FAQ</a> or on the <a class="text-link underline-offset-2 hover:underline" href="/about">About page</a>. Because the tool runs in your browser, we cannot see or recover anything you typed. See our <a class="text-link underline-offset-2 hover:underline" href="/privacy">Privacy Policy</a>.
+        </p>
+      </section>
+    </div>
+  </div>
+</Layout>

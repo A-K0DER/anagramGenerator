@@ -7,6 +7,9 @@ const links = [
   { href: '/#features', label: 'Features' },
   { href: '/#faq', label: 'FAQ' },
   { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+  { href: '/privacy', label: 'Privacy', wide: true },
+  { href: '/terms', label: 'Terms', wide: true },
 ];
 ---
 
@@ -24,7 +27,10 @@ const links = [
           <a
             href={l.href}
             aria-current={path === l.href ? 'page' : undefined}
-            class="hidden rounded-full px-3 py-2 text-sm text-body transition-colors hover:bg-hairline-soft hover:text-ink aria-[current=page]:text-ink sm:inline-block"
+            class:list={[
+              'hidden rounded-full px-3 py-2 text-sm text-body transition-colors hover:bg-hairline-soft hover:text-ink aria-[current=page]:text-ink',
+              l.wide ? 'lg:inline-block' : 'sm:inline-block',
+            ]}
           >
             {l.label}
           </a>

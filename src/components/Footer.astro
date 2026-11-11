@@ -16,14 +16,22 @@ const groups = [
     links: [
       { href: '/#features', label: 'Features' },
       { href: '/#faq', label: 'FAQ' },
-      { href: '/about', label: 'Dictionary & Method' },
+    ],
+  },
+  {
+    title: 'Company',
+    links: [
+      { href: '/about', label: 'About Us' },
+      { href: '/contact', label: 'Contact Us' },
+      { href: '/privacy', label: 'Privacy Policy' },
+      { href: '/terms', label: 'Terms & Conditions' },
     ],
   },
 ];
 ---
 
 <footer class="border-t border-hairline">
-  <div class="mx-auto grid max-w-300 gap-10 px-4 py-16 sm:grid-cols-[1.5fr_1fr_1fr] sm:px-6">
+  <div class="mx-auto grid max-w-300 gap-10 px-4 py-16 sm:grid-cols-[1.5fr_1fr_1fr_1fr] sm:px-6">
     <div>
       <p class="text-[15px] font-semibold tracking-tight text-ink" translate="no">{SITE.name}</p>
       <p class="mt-2 max-w-xs text-sm text-body">{SITE.tagline} Fast, private and free, with no sign-up.</p>
