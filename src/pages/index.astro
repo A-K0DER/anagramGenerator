@@ -3,17 +3,31 @@ import Layout from '../layouts/Layout.astro';
 import Tool from '../components/Tool.astro';
 import Features from '../components/Features.astro';
 import Faq from '../components/Faq.astro';
+import SeoContent from '../components/SeoContent.astro';
+import { SITE } from '../config';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: `${SITE.name}: Anagram Solver`,
+  description: SITE.homeDescription,
+  applicationCategory: 'UtilitiesApplication',
+  operatingSystem: 'Any',
+  browserRequirements: 'Requires JavaScript',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  ...(SITE.url && { url: SITE.url }),
+};
 ---
 
-<Layout>
+<Layout rawTitle={SITE.homeTitle} description={SITE.homeDescription} jsonLd={jsonLd}>
   <section class="relative isolate overflow-hidden">
     <div class="mesh pointer-events-none absolute inset-x-0 top-0 -z-10 h-[34rem]" aria-hidden="true"></div>
     <div class="mx-auto max-w-300 px-4 pt-16 pb-16 sm:px-6 md:pt-24 md:pb-24">
       <div class="mx-auto max-w-3xl text-center">
-        <p class="eyebrow">Anagram Generator &amp; Word Finder</p>
-        <h1 class="display-xl mt-4">Rearrange any phrase into something new.</h1>
+        <p class="eyebrow">Anagram Solver &amp; Generator</p>
+        <h1 class="display-xl mt-4">Anagram Solver: rearrange any phrase into something new.</h1>
         <p class="mx-auto mt-5 max-w-xl text-base leading-6 text-body">
-          Type a word, a name or a whole sentence. Get clean multi-word anagrams instantly, with the filters, sharing and export that other generators leave out.
+          Type a word, a name or a whole sentence. This free anagram solver and anagram generator returns clean multi-word anagrams instantly, with the filters, sharing and export that other generators leave out.
         </p>
       </div>
       <div class="mx-auto mt-12 max-w-3xl">
@@ -23,6 +37,7 @@ import Faq from '../components/Faq.astro';
   </section>
 
   <Features />
+  <SeoContent />
   <Faq />
 
   <section class="border-t border-hairline">

@@ -7,11 +7,15 @@ import { SITE } from '../config';
 interface Props {
   title?: string;
   description?: string;
+  rawTitle?: string;
+  keywords?: string;
+  jsonLd?: object;
 }
 
-const { title, description = SITE.description } = Astro.props;
-const fullTitle = title ? `${title} · ${SITE.name}` : `${SITE.name}: ${SITE.tagline}`;
+const { title, rawTitle, description = SITE.description, keywords = SITE.keywords, jsonLd } = Astro.props;
+const fullTitle = rawTitle ?? (title ? `${title} · ${SITE.name}` : `${SITE.name}: ${SITE.tagline}`);
 const canonical = SITE.url ? new URL(Astro.url.pathname, SITE.url).href : undefined;
+const ogImage = SITE.url ? new URL('/og-image.png', SITE.url).href : undefined;
 ---
 
 <!doctype html>
@@ -32,11 +36,24 @@ const canonical = SITE.url ? new URL(Astro.url.pathname, SITE.url).href : undefi
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
     {canonical && <link rel="canonical" href={canonical} />}
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:locale" content="en_US" />
+    {canonical && <meta property="og:url" content={canonical} />}
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    {ogImage && <meta property="og:image:width" content="1200" />}
+    {ogImage && <meta property="og:image:height" content="630" />}
+    {ogImage && <meta property="og:image:alt" content={`${SITE.name}: free anagram solver`} />}
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+    {jsonLd && <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />}
     <slot name="head" />
   </head>
   <body class="min-h-dvh">
