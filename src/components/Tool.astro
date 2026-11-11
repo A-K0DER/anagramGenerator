@@ -1,8 +1,8 @@
 ---
 const modes = [
-  { id: 'anagram', label: 'Anagram Generator' },
-  { id: 'words', label: 'Word Finder' },
-  { id: 'pair', label: 'Anagram Checker' },
+  { id: 'anagram', label: 'Anagram Generator', desc: 'Rearranges all your letters into new multi-word phrases. “dormitory” → “dirty room”.' },
+  { id: 'words', label: 'Word Finder', desc: 'Lists single dictionary words made from some of your letters (like for Scrabble), or words containing them all.' },
+  { id: 'pair', label: 'Anagram Checker', desc: 'Compares two phrases and tells you yes or no: do they use exactly the same letters?' },
 ];
 ---
 
@@ -12,12 +12,13 @@ const modes = [
       <div role="tablist" aria-label="Tool mode" class="flex flex-wrap gap-2">
         {
           modes.map((m, i) => (
-            <button type="button" role="tab" class="tab-pill" id={`tab-${m.id}`} data-mode={m.id} aria-selected={i === 0} aria-controls="tool-panel">
+            <button type="button" role="tab" class="tab-pill" id={`tab-${m.id}`} data-mode={m.id} aria-selected={i === 0} aria-controls="tool-panel" data-desc={m.desc}>
               {m.label}
             </button>
           ))
         }
       </div>
+      <p class="mt-3 text-sm text-body" data-mode-desc>{modes[0].desc}</p>
     </div>
 
     <form data-form novalidate autocomplete="off" id="tool-panel" role="tabpanel" aria-labelledby="tab-anagram" class="space-y-5 p-4 sm:p-6">

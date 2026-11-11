@@ -90,6 +90,9 @@ function init(root: HTMLElement) {
     root.querySelectorAll<HTMLElement>('[data-modes]').forEach((el) => {
       el.hidden = !el.dataset.modes!.split(' ').includes(next);
     });
+    $('[data-mode-desc]').textContent = tabs.find((t) => t.dataset.mode === next)?.dataset.desc ?? '';
+    qInput.placeholder =
+      next === 'pair' ? 'listen…' : next === 'words' ? 'Try “retains” or “scrabble”…' : 'Try “dormitory” or “Clint Eastwood”…';
     $('[data-label-q]').textContent = next === 'pair' ? 'First phrase' : 'Your word or phrase';
     $('[data-hint-q]').hidden = next === 'pair';
     $<HTMLButtonElement>('[data-submit]').textContent =
