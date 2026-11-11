@@ -11,3 +11,9 @@ export const SITE = {
   url: 'https://theanagramgenerator.com',
   contactEmail: 'ayushk199923@gmail.com',
 };
+
+export const ALTERNATIVES = [
+  { name: 'Internet Anagram Server', href: 'https://wordsmith.org/anagram/' },
+  { name: 'Dictionary.com Anagram Solver', href: 'https://www.dictionary.com/e/word-tools/anagram-solver/' },
+  { name: 'Thesaurus.com Anagram Solver', href: 'https://www.thesaurus.com/anagram-solver' },
+];

@@ -1,5 +1,5 @@
 ---
-import { SITE } from '../config';
+import { SITE, ALTERNATIVES } from '../config';
 
 const year = new Date().getFullYear();
 const groups = [
@@ -16,6 +16,7 @@ const groups = [
     links: [
       { href: '/#features', label: 'Features' },
       { href: '/#faq', label: 'FAQ' },
+      { href: '/compare', label: 'Compare Solvers' },
     ],
   },
   {
@@ -32,7 +33,7 @@ const groups = [
 ---
 
 <footer class="border-t border-hairline">
-  <div class="mx-auto grid max-w-300 gap-10 px-4 py-16 sm:grid-cols-[1.5fr_1fr_1fr_1fr] sm:px-6">
+  <div class="mx-auto grid max-w-300 gap-10 px-4 py-16 sm:grid-cols-[1.5fr_1fr_1fr_1fr_1.2fr] sm:px-6">
     <div>
       <p class="text-[15px] font-semibold tracking-tight text-ink" translate="no">{SITE.name}</p>
       <p class="mt-2 max-w-xs text-sm text-body">{SITE.tagline} Fast, private and free, with no sign-up.</p>
@@ -56,6 +57,21 @@ const groups = [
         </nav>
       ))
     }
+    <nav aria-label="Other anagram solvers">
+      <p class="eyebrow">Other solvers</p>
+      <ul class="mt-3 space-y-2 text-sm">
+        {
+          ALTERNATIVES.map((a) => (
+            <li>
+              <a href={a.href} rel="noopener" class="text-body transition-colors hover:text-ink">{a.name}</a>
+            </li>
+          ))
+        }
+        <li>
+          <a href="/compare" class="text-body transition-colors hover:text-ink">Compare all</a>
+        </li>
+      </ul>
+    </nav>
   </div>
   <div class="border-t border-hairline">
     <p class="mx-auto max-w-300 px-4 py-6 text-xs text-mute sm:px-6">

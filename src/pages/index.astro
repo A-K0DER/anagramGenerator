@@ -4,7 +4,7 @@ import Tool from '../components/Tool.astro';
 import Features from '../components/Features.astro';
 import Faq from '../components/Faq.astro';
 import SeoContent from '../components/SeoContent.astro';
-import { SITE } from '../config';
+import { SITE, ALTERNATIVES } from '../config';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -39,6 +39,25 @@ const jsonLd = {
   <Features />
   <SeoContent />
   <Faq />
+
+  <section class="border-t border-hairline">
+    <div class="mx-auto max-w-3xl px-4 py-24 sm:px-6">
+      <p class="eyebrow">Compare</p>
+      <h2 class="heading-lg mt-3">Other anagram solvers worth trying</h2>
+      <p class="mt-3 text-base leading-6 text-body">
+        Every tool has its strengths. Here are some well-known alternatives, and a <a class="text-link underline-offset-2 hover:underline" href="/compare">comparison of what to look for</a> in a solver.
+      </p>
+      <ul class="mt-6 grid gap-4 sm:grid-cols-3">
+        {
+          ALTERNATIVES.map((a) => (
+            <li class="card p-4">
+              <a class="text-sm font-semibold text-link underline-offset-2 hover:underline" href={a.href} rel="noopener">{a.name}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
 
   <section class="border-t border-hairline">
     <div class="mx-auto max-w-300 px-4 py-24 text-center sm:px-6">
