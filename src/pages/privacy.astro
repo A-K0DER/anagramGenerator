@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { SITE } from '../config';
 
-const updated = 'November 11, 2026';
+const updated = 'November 11, 2026'; // update whenever this policy changes
 ---
 
 <Layout title="Privacy Policy" description="Privacy Policy for anagramGenerator: your text is processed in your browser and never sent to our servers.">
@@ -15,13 +15,13 @@ const updated = 'November 11, 2026';
       <section>
         <h2 class="heading-md">Summary</h2>
         <p class="mt-2 text-sm leading-6 text-body">
-          {SITE.name} runs in your browser. The words and phrases you enter are processed on your device and are not sent to or stored on our servers. The site does use Google Analytics and Google AdSense, which set cookies as described below.
+          {SITE.name} runs in your browser. The words and phrases you enter are processed on your device and are not sent to or stored on our servers. The site uses Google Tag Manager, Google Analytics and Google AdSense, which set cookies only after you accept them, as described below.
         </p>
       </section>
       <section>
-        <h2 class="heading-md">Information we do not collect</h2>
+        <h2 class="heading-md">Information you give us</h2>
         <p class="mt-2 text-sm leading-6 text-body">
-          We do not require accounts, and we do not ask for your name, email address or any other personal details to use the tool. The text you type into the generator never leaves the page. Our analytics and advertising partners may collect the technical data described below.
+          We do not require accounts, and we do not ask for your name, email address or any other personal details to use the tool. The text you type into the generator never leaves the page. Our analytics and advertising partners may collect the technical data described below if you accept cookies. If you email us, we use your message and address only to reply.
         </p>
       </section>
       <section>
@@ -33,28 +33,34 @@ const updated = 'November 11, 2026';
       <section>
         <h2 class="heading-md">Server logs and hosting</h2>
         <p class="mt-2 text-sm leading-6 text-body">
-          Like most websites, our hosting provider may keep standard server logs such as IP address, browser type and requested pages for security and reliability. We do not use these logs to identify individual visitors.
+          The site is hosted on Cloudflare. Like most websites, our hosting provider may keep standard server logs such as IP address, browser type and requested pages for security and reliability. We do not use these logs to identify individual visitors.
         </p>
       </section>
       <section>
         <h2 class="heading-md">Analytics</h2>
         <p class="mt-2 text-sm leading-6 text-body">
-          We use Google Analytics to understand how the site is used, such as which pages are visited, roughly where visitors are located, and what device and browser they use. Google Analytics uses cookies and similar identifiers to collect this information. It does not receive the words or phrases you enter into the generator. You can opt out with the <a class="text-link underline-offset-2 hover:underline" href="https://tools.google.com/dlpage/gaoptout" rel="noopener">Google Analytics opt-out browser add-on</a>. Learn how Google handles this data in <a class="text-link underline-offset-2 hover:underline" href="https://policies.google.com/technologies/partner-sites" rel="noopener">How Google uses information from sites that use its services</a>.
+          We load Google Analytics through Google Tag Manager to understand how the site is used, such as which pages are visited, roughly where visitors are located, and what device and browser they use. Google Analytics uses cookies and similar identifiers to collect this information, and only does so after you accept cookies in our banner. It does not receive the words or phrases you enter into the generator. You can opt out with the <a class="text-link underline-offset-2 hover:underline" href="https://tools.google.com/dlpage/gaoptout" rel="noopener">Google Analytics opt-out browser add-on</a>. Learn how Google handles this data in <a class="text-link underline-offset-2 hover:underline" href="https://policies.google.com/technologies/partner-sites" rel="noopener">How Google uses information from sites that use its services</a>.
         </p>
       </section>
       <section>
         <h2 class="heading-md">Advertising and cookies</h2>
         <p class="mt-2 text-sm leading-6 text-body">
-          We show ads served by Google AdSense. Google and its partners use cookies, including the DoubleClick cookie, to serve ads based on your previous visits to this and other websites. Google’s use of advertising cookies enables it and its partners to serve ads based on your visit to our site and other sites on the internet.
+          We use, or plan to use, Google AdSense to show ads that help fund the site. Google and its partners use cookies, including the DoubleClick cookie, to serve ads based on your previous visits to this and other websites. Google’s use of advertising cookies enables it and its partners to serve ads based on your visit to our site and other sites on the internet.
         </p>
         <p class="mt-2 text-sm leading-6 text-body">
-          You can opt out of personalized advertising at <a class="text-link underline-offset-2 hover:underline" href="https://adssettings.google.com" rel="noopener">Google Ads Settings</a>, or opt out of some third-party vendors’ use of cookies for personalized advertising at <a class="text-link underline-offset-2 hover:underline" href="https://www.aboutads.info" rel="noopener">aboutads.info</a>. Where required, such as in the European Economic Area, the United Kingdom and Switzerland, we ask for your consent before setting advertising and analytics cookies, and you can change your choice at any time. You can also block or delete cookies in your browser settings, though some parts of the site may then work differently.
+          You can opt out of personalized advertising at <a class="text-link underline-offset-2 hover:underline" href="https://adssettings.google.com" rel="noopener">Google Ads Settings</a>, or opt out of some third-party vendors’ use of cookies for personalized advertising at <a class="text-link underline-offset-2 hover:underline" href="https://www.aboutads.info" rel="noopener">aboutads.info</a>. When you first visit, a banner asks you to accept or reject non-essential cookies. Until you accept, analytics and advertising cookies are not set. You can change your choice at any time using “Cookie settings” in the footer. You can also block or delete cookies in your browser settings, though some parts of the site may then work differently.
         </p>
       </section>
       <section>
         <h2 class="heading-md">Third parties</h2>
         <p class="mt-2 text-sm leading-6 text-body">
           Apart from Google Analytics and Google AdSense described above, we do not share your data with third parties, and we do not sell personal information. Links to other sites are governed by those sites’ own policies.
+        </p>
+      </section>
+      <section>
+        <h2 class="heading-md">Your rights</h2>
+        <p class="mt-2 text-sm leading-6 text-body">
+          Depending on where you live (for example under the GDPR or the CCPA), you may have the right to access, correct or delete personal data, to object to processing, and to withdraw consent at any time. We do not hold an account or profile for you, so most data is held by Google or your own browser. Withdraw consent through “Cookie settings” in the footer, or contact us with any request.
         </p>
       </section>
       <section>

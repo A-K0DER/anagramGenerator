@@ -9,5 +9,5 @@ export const SITE = {
   keywords:
     'anagram solver, anagram, anagram generator, anagram definition, what is an anagram, anagram maker, anagram finder, anagram creator, anagrams solver, anagrams cheat',
   url: 'https://theanagramgenerator.com',
-  contactEmail: 'hello@theanagramgenerator.com',
+  contactEmail: 'ayushk199923@gmail.com',
 };

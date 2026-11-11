@@ -23,6 +23,7 @@ const groups = [
     links: [
       { href: '/about', label: 'About Us' },
       { href: '/contact', label: 'Contact Us' },
+      { href: '/contact#support', label: 'Support' },
       { href: '/privacy', label: 'Privacy Policy' },
       { href: '/terms', label: 'Terms & Conditions' },
     ],
@@ -46,6 +47,11 @@ const groups = [
                 <a href={l.href} class="text-body transition-colors hover:text-ink">{l.label}</a>
               </li>
             ))}
+            {g.title === 'Company' && (
+              <li>
+                <button type="button" data-cookie-settings class="text-body transition-colors hover:text-ink">Cookie settings</button>
+              </li>
+            )}
           </ul>
         </nav>
       ))

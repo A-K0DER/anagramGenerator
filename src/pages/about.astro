@@ -1,15 +1,23 @@
 ---
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import Layout from '../layouts/Layout.astro';
+import { SITE } from '../config';
+
+const count = (file: string) =>
+  readFileSync(join(process.cwd(), 'public', 'dict', file), 'utf8')
+    .split('\n')
+    .filter(Boolean).length.toLocaleString('en-US');
 
 const stats = [
-  { label: 'Dictionary words', value: '274,041' },
-  { label: 'Common words', value: '15,456' },
+  { label: 'Dictionary words', value: count('en.txt') },
+  { label: 'Common words', value: count('en-common.txt') },
   { label: 'Language', value: 'English' },
   { label: 'Processing', value: 'In your browser' },
 ];
 ---
 
-<Layout title="About Us" description="About anagramGenerator: a free, private anagram solver that runs entirely in your browser. Learn who we are, which dictionaries we use and how it works.">
+<Layout title="About Us" description="About anagramGenerator: a free, private anagram solver that runs entirely in your browser. Learn who runs it, which dictionaries we use and how it works.">
   <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6 md:py-24">
     <p class="eyebrow">About</p>
     <h1 class="display-xl mt-3 !text-4xl sm:!text-5xl">About us</h1>
@@ -30,6 +38,12 @@ const stats = [
 
     <div class="mt-12 space-y-10">
       <section>
+        <h2 class="heading-md">Who we are</h2>
+        <p class="mt-2 text-sm leading-6 text-body">
+          {SITE.name} is an independent project, designed, built and maintained by a single developer. It is funded by non-intrusive advertising, which keeps the tool free for everyone. You can reach the person behind it at <a class="text-link underline-offset-2 hover:underline" href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.
+        </p>
+      </section>
+      <section>
         <h2 class="heading-md">Our mission</h2>
         <p class="mt-2 text-sm leading-6 text-body">
           Most anagram sites are slow, cluttered and send your text to a server. We wanted a fast, private tool with clean multi-word results, useful filters, sharing and export, and no sign-up. Questions or ideas? <a class="text-link underline-offset-2 hover:underline" href="/contact">Get in touch</a>.
@@ -38,7 +52,7 @@ const stats = [
       <section>
         <h2 class="heading-md">Dictionaries</h2>
         <p class="mt-2 text-sm leading-6 text-body">
-          The full list comes from the open-source <a class="text-link underline-offset-2 hover:underline" href="https://github.com/sindresorhus/word-list">word-list</a> package. Short words are trimmed to a standard set to avoid filler results. “Common words only” intersects that list with the 20,000 most frequent English words from the <a class="text-link underline-offset-2 hover:underline" href="https://github.com/first20hours/google-10000-english">google-10000-english</a> project.
+          The full list comes from the open-source <a class="text-link underline-offset-2 hover:underline" href="https://github.com/sindresorhus/word-list">word-list</a> package. Only letters a–z are kept, words longer than 24 letters are dropped, and one- and two-letter words are limited to a short list of valid ones to avoid filler results. “Common words only” keeps the words that also appear in the 20,000 most frequent English words from the <a class="text-link underline-offset-2 hover:underline" href="https://github.com/first20hours/google-10000-english">google-10000-english</a> project.
         </p>
       </section>
       <section>
@@ -50,7 +64,7 @@ const stats = [
       <section>
         <h2 class="heading-md">Privacy</h2>
         <p class="mt-2 text-sm leading-6 text-body">
-          The dictionary downloads once and is cached by your browser. Searches never leave the page. History and favorites live in local storage and can be cleared at any time.
+          The dictionary downloads once and is cached by your browser. The text you search for never leaves the page. History and favorites live in local storage and can be cleared at any time. Analytics and ads use cookies only if you accept them; see the <a class="text-link underline-offset-2 hover:underline" href="/privacy">Privacy Policy</a> for details.
         </p>
       </section>
     </div>

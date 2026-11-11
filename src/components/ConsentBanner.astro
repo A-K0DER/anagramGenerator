@@ -1,0 +1,56 @@
+---
+---
+
+<div
+  id="consent-banner"
+  role="dialog"
+  aria-label="Cookie consent"
+  hidden
+  class="fixed inset-x-4 bottom-4 z-50 mx-auto max-w-2xl rounded-lg border border-hairline bg-surface p-4 shadow-lg sm:p-5"
+>
+  <p class="text-sm leading-6 text-body">
+    We use cookies for analytics and to show ads. Your anagram text is never sent to us. You can accept or reject non-essential cookies and change your choice at any time. See our
+    <a class="text-link underline-offset-2 hover:underline" href="/privacy">Privacy Policy</a>.
+  </p>
+  <div class="mt-4 flex flex-wrap gap-3">
+    <button type="button" data-consent="granted" class="pill">Accept all</button>
+    <button type="button" data-consent="denied" class="pill">Reject non-essential</button>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var banner = document.getElementById('consent-banner');
+    if (!banner) return;
+    function read() {
+      try {
+        return localStorage.getItem('cookie-consent');
+      } catch (e) {
+        return null;
+      }
+    }
+    function apply(value) {
+      try {
+        localStorage.setItem('cookie-consent', value);
+      } catch (e) {}
+      window.gtag('consent', 'update', {
+        ad_storage: value,
+        ad_user_data: value,
+        ad_personalization: value,
+        analytics_storage: value,
+      });
+      banner.hidden = true;
+    }
+    if (!read()) banner.hidden = false;
+    banner.querySelectorAll('[data-consent]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        apply(b.getAttribute('data-consent'));
+      });
+    });
+    document.querySelectorAll('[data-cookie-settings]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        banner.hidden = false;
+      });
+    });
+  })();
+</script>
