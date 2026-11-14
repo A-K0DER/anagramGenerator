@@ -7,7 +7,7 @@ export const SITE = {
   homeDescription:
     'Free anagram solver and anagram generator. Enter any word or phrase and find every anagram instantly. Anagram maker, finder and creator with filters, export and no sign-up.',
   keywords:
-    'anagram solver, anagram, anagram generator, anagram definition, what is an anagram, anagram maker, anagram finder, anagram creator, anagrams solver, anagrams cheat',
+    'anagram solver, anagram, anagram generator, anagram of, anagram meaning, word anagram, free anagram solver, anagram definition, what is an anagram, what is anagram, meaning of anagram, anagram maker, anagram finder, anagram creator, anagram game, anagram solver crossword clue, anagrams solver, anagrams cheat',
   url: 'https://theanagramgenerator.com',
   contactEmail: 'ayushk199923@gmail.com',
 };
