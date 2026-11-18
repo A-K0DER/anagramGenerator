@@ -11,11 +11,12 @@ interface Props {
   rawTitle?: string;
   keywords?: string;
   jsonLd?: object;
+  noindex?: boolean;
 }
 
-const { title, rawTitle, description = SITE.description, keywords = SITE.keywords, jsonLd } = Astro.props;
+const { title, rawTitle, description = SITE.description, keywords = SITE.keywords, jsonLd, noindex = false } = Astro.props;
 const fullTitle = rawTitle ?? (title ? `${title} · ${SITE.name}` : `${SITE.name}: ${SITE.tagline}`);
-const canonical = SITE.url ? new URL(Astro.url.pathname, SITE.url).href : undefined;
+const canonical = SITE.url && !noindex ? new URL(Astro.url.pathname, SITE.url).href : undefined;
 const ogImage = SITE.url ? new URL('/og-image.png', SITE.url).href : undefined;
 ---
 
@@ -25,6 +26,7 @@ const ogImage = SITE.url ? new URL('/og-image.png', SITE.url).href : undefined;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    {noindex && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#fdf3dc" />
     <script is:inline>
       try {
