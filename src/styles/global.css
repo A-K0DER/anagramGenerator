@@ -152,7 +152,7 @@
     @apply border-hairline bg-surface text-ink hover:bg-warning-soft;
   }
   .tab-pill {
-    @apply inline-flex h-9 items-center rounded-full border border-hairline bg-surface px-4 text-sm font-medium text-ink transition-colors hover:bg-warning-soft aria-selected:border-ink aria-selected:bg-sun aria-selected:text-[#1b1340] pointer-coarse:h-11;
+    @apply inline-flex h-9 items-center rounded-full border border-hairline bg-surface px-4 text-sm font-medium text-ink transition-colors hover:bg-warning-soft aria-[current=page]:border-ink aria-[current=page]:bg-sun aria-[current=page]:text-[#1b1340] pointer-coarse:h-11;
   }
   .field {
     @apply h-9 w-full rounded-sm border border-hairline bg-surface px-3 text-sm text-ink placeholder:text-faint pointer-coarse:h-11 pointer-coarse:text-base;

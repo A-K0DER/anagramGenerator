@@ -26,7 +26,7 @@ function init(root: HTMLElement) {
   const countEl = $('[data-count]');
   const shuffleBtn = $<HTMLButtonElement>('[data-shuffle]');
   const sortSel = $<HTMLSelectElement>('[data-sort]');
-  const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role=tab]')];
+  const tabs = [...root.querySelectorAll<HTMLAnchorElement>('a[data-mode]')];
 
   let mode: Mode = 'anagram';
   let phrases: string[] = []; // current result rows as text, for copy/export
@@ -85,8 +85,7 @@ function init(root: HTMLElement) {
   /* ---------- mode + URL state ---------- */
   function setMode(next: Mode, focus = false) {
     mode = next;
-    tabs.forEach((t) => t.setAttribute('aria-selected', String(t.dataset.mode === next)));
-    form.setAttribute('aria-labelledby', `tab-${next}`);
+    tabs.forEach((t) => (t.dataset.mode === next ? t.setAttribute('aria-current', 'page') : t.removeAttribute('aria-current')));
     root.querySelectorAll<HTMLElement>('[data-modes]').forEach((el) => {
       el.hidden = !el.dataset.modes!.split(' ').includes(next);
     });
@@ -370,7 +369,20 @@ function init(root: HTMLElement) {
     $<HTMLElement>('[data-clear-favorites]').hidden = favorites.length === 0;
   }
 
+  /** Each mode lives on its own page; send people there, carrying their text. */
+  function pageFor(m: Mode) {
+    return tabs.find((t) => t.dataset.mode === m)!.getAttribute('href')!;
+  }
+  function goTo(m: Mode, q: string, b?: string) {
+    const p = new URLSearchParams();
+    if (q) p.set('q', q);
+    if (m === 'pair' && b) p.set('b', b);
+    const qs = p.toString();
+    location.assign(`${pageFor(m)}${qs ? `?${qs}` : ''}`);
+  }
+
   function restore(s: Saved) {
+    if (s.mode !== mode) return goTo(s.mode, s.q, s.b);
     setMode(s.mode);
     qInput.value = s.q;
     bInput.value = s.b ?? '';
@@ -390,17 +402,12 @@ function init(root: HTMLElement) {
   });
   sortSel.addEventListener('change', () => renderRows(false));
 
-  tabs.forEach((tab, i) => {
-    tab.addEventListener('click', () => {
-      setMode(tab.dataset.mode as Mode);
-      output.hidden = true;
-      if (qInput.value.trim()) run(false);
-    });
-    tab.addEventListener('keydown', (e) => {
-      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
-      const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
-      next.focus();
-      next.click();
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', (e) => {
+      if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return; // let new-tab clicks through
+      e.preventDefault();
+      if (tab.dataset.mode === mode) return;
+      goTo(tab.dataset.mode as Mode, qInput.value.trim(), bInput.value.trim());
     });
   });
 
@@ -463,7 +470,17 @@ function init(root: HTMLElement) {
   });
 
   /* ---------- boot ---------- */
-  paramsToState(new URLSearchParams(location.search));
+  const boot = new URLSearchParams(location.search);
+  const asked = boot.get('mode') as Mode | null;
+  const home = (root.dataset.defaultMode ?? 'anagram') as Mode;
+  if (asked && MODES.includes(asked) && asked !== home) {
+    // Old shared links like /?mode=words: move to that mode's own page.
+    boot.delete('mode');
+    const qs = boot.toString();
+    location.replace(`${pageFor(asked)}${qs ? `?${qs}` : ''}`);
+    return;
+  }
+  paramsToState(boot);
   renderSaved();
   renderTiles();
   if (qInput.value.trim()) run(false);
