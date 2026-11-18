@@ -105,7 +105,7 @@ function init(root: HTMLElement) {
     const q = qInput.value.trim();
     if (!q) return p;
     p.set('q', q);
-    if (mode !== 'anagram') p.set('mode', mode);
+    if (mode !== (root.dataset.defaultMode ?? 'anagram')) p.set('mode', mode);
     if (mode === 'pair') {
       if (bInput.value.trim()) p.set('b', bInput.value.trim());
       return p;
@@ -129,7 +129,8 @@ function init(root: HTMLElement) {
 
   function paramsToState(p: URLSearchParams) {
     const m = p.get('mode') as Mode | null;
-    setMode(m && MODES.includes(m) ? m : 'anagram');
+    const fallback = root.dataset.defaultMode as Mode | undefined;
+    setMode(m && MODES.includes(m) ? m : fallback && MODES.includes(fallback) ? fallback : 'anagram');
     qInput.value = p.get('q') ?? '';
     bInput.value = p.get('b') ?? '';
     for (const key of ['minw', 'maxw', 'minl', 'max', 'inc', 'exc', 'scope', 'sw', 'ew']) {

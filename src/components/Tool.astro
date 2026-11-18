@@ -1,4 +1,8 @@
 ---
+interface Props {
+  defaultMode?: 'anagram' | 'words' | 'pair';
+}
+const { defaultMode = 'anagram' } = Astro.props;
 const modes = [
   { id: 'anagram', label: 'Anagram Generator', desc: 'Rearranges all your letters into new multi-word phrases. “dormitory” → “dirty room”.' },
   { id: 'words', label: 'Word Finder', desc: 'Lists single dictionary words made from some of your letters (like for Scrabble), or words containing them all.' },
@@ -6,7 +10,7 @@ const modes = [
 ];
 ---
 
-<section id="tool" data-tool class="scroll-mt-20">
+<section id="tool" data-tool data-default-mode={defaultMode} class="scroll-mt-20">
   <div class="card overflow-hidden shadow-float">
     <div class="border-b border-hairline p-4 sm:p-6">
       <div role="tablist" aria-label="Tool mode" class="flex flex-wrap gap-2">

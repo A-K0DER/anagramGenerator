@@ -1,0 +1,82 @@
+---
+import ToolLanding from '../components/ToolLanding.astro';
+
+const faqs = [
+  {
+    q: 'What is the difference between the two “Find Words That” settings?',
+    a: '“Can be made from my letters” lists words you can spell using some or all of your letters, which is what you need for a rack of tiles. “Contain all my letters” lists longer words that include every one of your letters, which is useful when you know part of a word and need words built around it.',
+  },
+  {
+    q: 'Does it use the official Scrabble dictionary?',
+    a: 'No. It uses a general English word list of about 274,000 words, and a smaller list of everyday words. Official Scrabble lists differ from it, and differ from each other, so check a word against your game’s own dictionary before you play it.',
+  },
+  {
+    q: 'Can it handle blank tiles or wildcards?',
+    a: 'Not as a wildcard symbol. To test a blank, try the tool with each candidate letter added to your rack. That is a quick way to see which letter opens up the best words.',
+  },
+  {
+    q: 'Can I use it for crosswords?',
+    a: 'Yes, for the cases where you know some letters. Enter the letters you have, then use the Starts With and Ends With boxes to match the pattern the grid gives you.',
+  },
+  {
+    q: 'Is it fair to use in a game?',
+    a: 'That depends on the game and the people playing it. It is a legitimate study aid: play a round without it, then look up your rack afterwards to see the words you missed.',
+  },
+];
+---
+
+<ToolLanding
+  mode="words"
+  title="Word Finder: Find Words From Your Letters"
+  description="Enter the letters on your rack and list every word you can spell, or every word that contains them. Filter by starting and ending letters. Free, private and no sign-up."
+  eyebrow="Word Finder"
+  h1="Find every word your letters can spell."
+  intro="Type the tiles you hold. The finder lists the words they can make, longest first, with filters for the start and end of the word."
+  faqs={faqs}
+>
+  <section>
+    <h2 class="heading-lg">When to use the word finder</h2>
+    <p class="mt-4 text-base leading-7 text-body">
+      This page is for puzzles where you may leave letters unused: a Scrabble rack, a letter-tile game, a themed word hunt, or a crossword where you hold only some of the letters. It differs from the <a class="text-link underline-offset-2 hover:underline" href="/anagram-solver/">anagram solver</a>, which must use every letter you type.
+    </p>
+    <p class="mt-4 text-base leading-7 text-body">Open Options and look for “Find Words That” to choose between two searches:</p>
+    <div class="mt-4 grid gap-4 sm:grid-cols-2">
+      <div class="card p-4">
+        <h3 class="text-sm font-semibold text-ink">Can be made from my letters</h3>
+        <p class="mt-2 text-sm leading-6 text-body">Words spelled from some or all of your letters, each letter used no more times than you have it. Use this for racks.</p>
+      </div>
+      <div class="card p-4">
+        <h3 class="text-sm font-semibold text-ink">Contain all my letters</h3>
+        <p class="mt-2 text-sm leading-6 text-body">Longer words that include all of your letters, plus others. Use this when you are building outward from a fragment.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="heading-lg">A worked example: the rack S A T I R E</h2>
+    <p class="mt-4 text-base leading-7 text-body">
+      Entering these six letters and keeping common words on, you will find short plays such as <strong class="text-ink">east, rise, seat, star</strong> and <strong class="text-ink">tire</strong>, mid-length words such as <strong class="text-ink">arise, raise, stair, stare</strong> and <strong class="text-ink">tries</strong>, and the six-letter words <strong class="text-ink">satire</strong> and <strong class="text-ink">arties</strong> that use the whole rack. Add a seventh letter, say N, and the same rack becomes <strong class="text-ink">nastier, retinas, stainer</strong> or <strong class="text-ink">stearin</strong>.
+    </p>
+    <p class="mt-4 text-base leading-7 text-body">
+      That last point is worth remembering. In standard Scrabble, using all seven tiles in one turn earns a 50-point bonus, so words made of the same seven letters are worth learning as a family.
+    </p>
+  </section>
+
+  <section>
+    <h2 class="heading-lg">Techniques that win word games</h2>
+    <ul class="mt-5 list-disc space-y-3 pl-6 text-base leading-7 text-body">
+      <li><strong class="text-ink">Learn word families.</strong> “Listen” has the same letters as “silent”, “tinsel” and “enlist”. Knowing one member of a family tends to bring the rest with it.</li>
+      <li><strong class="text-ink">Learn short words.</strong> Two- and three-letter words let you play in tight spaces and make several words at once.</li>
+      <li><strong class="text-ink">Hunt for hooks.</strong> Adding S, ED, ER or ING to a word already on the board is often the way to use awkward letters.</li>
+      <li><strong class="text-ink">Keep a balanced rack.</strong> A mix of vowels and consonants gives you more options next turn than a rack of one kind.</li>
+      <li><strong class="text-ink">Use Starts With and Ends With</strong> to match a gap on the board or a crossword pattern, such as a word that must begin with T and end with S.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="heading-lg">Honest limits</h2>
+    <p class="mt-4 text-base leading-7 text-body">
+      The finder lists words that exist in a general English list. It does not know board positions, premium squares or point values, and it does not match patterns that have gaps in the middle. For game rules, check the dictionary your game uses. If you want to confirm two words really share a letter set, use the <a class="text-link underline-offset-2 hover:underline" href="/anagram-checker/">anagram checker</a>.
+    </p>
+  </section>
+</ToolLanding>

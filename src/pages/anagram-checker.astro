@@ -1,0 +1,94 @@
+---
+import ToolLanding from '../components/ToolLanding.astro';
+
+const matches = [
+  ['Listen', 'Silent'],
+  ['Santa', 'Satan'],
+  ['Funeral', 'Real fun'],
+  ['A gentleman', 'Elegant man'],
+  ['Astronomers', 'No more stars'],
+];
+const misses = [
+  { a: 'Listen', b: 'Silence', why: 'Silence has an extra C and E.' },
+  { a: 'Stop', b: 'Stoop', why: 'One letter too many.' },
+  { a: 'Race', b: 'Rice', why: 'The A and the I differ.' },
+];
+
+const faqs = [
+  {
+    q: 'What makes two phrases anagrams?',
+    a: 'They must contain exactly the same letters the same number of times. Order, spacing, capitals and punctuation do not matter.',
+  },
+  {
+    q: 'Are spaces, punctuation and numbers ignored?',
+    a: 'Yes. Only the letters A to Z are compared. Accented letters count as their plain versions, so “é” is treated as “e”. Digits are ignored.',
+  },
+  {
+    q: 'Is a word an anagram of itself?',
+    a: 'Mathematically it uses the same letters, so the checker will say yes. For puzzles, most people only count a different arrangement, so “listen” and “listen” would not be a satisfying answer.',
+  },
+  {
+    q: 'Do both phrases have to be real words?',
+    a: 'No. The checker compares letters only and does not look anything up. It will confirm a match between any two strings of letters.',
+  },
+  {
+    q: 'What if my pair is nearly an anagram?',
+    a: 'Then it is a “near anagram”. Try the anagram solver on one phrase with Must Include set to a word from the other, and see what letters remain.',
+  },
+];
+---
+
+<ToolLanding
+  mode="pair"
+  title="Anagram Checker: Are These Two Words Anagrams?"
+  description="Enter two words or phrases and find out instantly whether they are anagrams of each other. Ignores case, spaces and punctuation. Free and private."
+  eyebrow="Anagram Checker"
+  h1="Check whether two phrases are anagrams."
+  intro="Type one phrase in each box. You get a plain yes or no, based on whether both use exactly the same letters."
+  faqs={faqs}
+>
+  <section>
+    <h2 class="heading-lg">How the check works</h2>
+    <p class="mt-4 text-base leading-7 text-body">
+      The checker lowercases both phrases, removes everything that is not a letter, and counts how many times each letter from A to Z appears. If every count matches, the phrases are anagrams. There is nothing to look up, so the result does not depend on any dictionary and appears immediately.
+    </p>
+    <p class="mt-4 text-base leading-7 text-body">
+      You can do the same on paper: write both phrases as sorted lists of letters, or tally each letter in a table, and compare. A mismatch also tells you which letters are the problem, which helps when you are constructing your own anagram.
+    </p>
+  </section>
+
+  <section>
+    <h2 class="heading-lg">Pairs to try</h2>
+    <div class="mt-6 grid gap-6 sm:grid-cols-2">
+      <div>
+        <h3 class="heading-md">These match</h3>
+        <ul class="mt-3 space-y-2 text-sm text-body">
+          {matches.map(([a, b]) => <li><span class="text-ink">{a}</span> = <span class="text-ink">{b}</span></li>)}
+        </ul>
+      </div>
+      <div>
+        <h3 class="heading-md">These are close but do not</h3>
+        <ul class="mt-3 space-y-2 text-sm text-body">
+          {misses.map((m) => <li><span class="text-ink">{m.a}</span> ≠ <span class="text-ink">{m.b}</span>: {m.why}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="heading-lg">Common reasons a pair fails</h2>
+    <ul class="mt-5 list-disc space-y-3 pl-6 text-base leading-7 text-body">
+      <li><strong class="text-ink">A spare letter.</strong> One side has an extra letter. This is the usual cause, and easy to miss in long phrases.</li>
+      <li><strong class="text-ink">A repeated letter counted once.</strong> “Moon starer” has two Os and two Rs. Check doubles carefully.</li>
+      <li><strong class="text-ink">A dropped article.</strong> Words such as “the” or “a” count as letters. Leaving one out changes the set.</li>
+      <li><strong class="text-ink">A different spelling.</strong> British and American spellings such as “colour” and “color” differ by a letter, so a pair built on one spelling will fail if you type the other.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="heading-lg">Where this is useful</h2>
+    <p class="mt-4 text-base leading-7 text-body">
+      Teachers use it to mark vocabulary exercises, puzzle setters use it to verify a clue before publishing, and writers use it to confirm a pen name hides the message they intended. If you are still looking for a match, the <a class="text-link underline-offset-2 hover:underline" href="/anagram-solver/">anagram solver</a> will suggest candidates for a phrase, and the <a class="text-link underline-offset-2 hover:underline" href="/word-finder/">word finder</a> will list the words hiding in a set of letters.
+    </p>
+  </section>
+</ToolLanding>

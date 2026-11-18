@@ -1,0 +1,125 @@
+---
+import ToolLanding from '../components/ToolLanding.astro';
+
+const examples = [
+  { from: 'Dormitory', to: 'Dirty room', note: 'The classic. The new phrase describes the original.' },
+  { from: 'Astronomer', to: 'Moon starer', note: 'Same letters, and the meaning stays in the same field.' },
+  { from: 'The eyes', to: 'They see', note: 'A short phrase that still reads as a sentence.' },
+  { from: 'Schoolmaster', to: 'The classroom', note: 'A job title becomes the place where it happens.' },
+  { from: 'Conversation', to: 'Voices rant on', note: 'A single word splits into four.' },
+  { from: 'Debit card', to: 'Bad credit', note: 'Two money terms swapped around.' },
+];
+
+const faqs = [
+  {
+    q: 'How is the solver different from the word finder?',
+    a: 'The solver uses every letter you type, exactly once, and can return phrases of several words. The word finder returns single words and does not need to use all your letters. Pick the solver for names and phrases, and the word finder for a rack of tiles.',
+  },
+  {
+    q: 'Why does a long phrase return so many results?',
+    a: 'The number of valid combinations grows quickly with length. Turn on common words, lower the maximum number of words, or raise the minimum word length to keep the list readable. Must Include lets you build around a word you want.',
+  },
+  {
+    q: 'Does the solver handle names?',
+    a: 'Yes. Spaces, punctuation, capital letters and accents are ignored, so you can paste a full name. The dictionary contains ordinary English words rather than proper nouns, so results are made of common words.',
+  },
+  {
+    q: 'Can it find single-word anagrams only?',
+    a: 'Set both Min Words and Max Words to 1 in the options. The tool then lists only results made of one word, such as “silent” and “tinsel” for “listen”.',
+  },
+  {
+    q: 'Is anything I type uploaded?',
+    a: 'No. The word list is downloaded once and each search runs inside your browser.',
+  },
+];
+---
+
+<ToolLanding
+  mode="anagram"
+  title="Anagram Solver: Find Multi-Word Anagrams of Any Phrase"
+  description="Type a word, name or phrase and see the anagrams it can make, including multi-word results. Filter by word count and length. Free and private, with worked examples and solving tips."
+  eyebrow="Anagram Solver"
+  h1="Solve any anagram, from single words to whole sentences."
+  intro="Enter the letters you have and the solver searches a 274,000-word dictionary for every way to use all of them exactly once."
+  faqs={faqs}
+>
+  <section>
+    <h2 class="heading-lg">What the solver is best at</h2>
+    <p class="mt-4 text-base leading-7 text-body">
+      Use this page when you want to rearrange <em>all</em> of a set of letters: a name you want to play with, a crossword fodder word, a username, or a title for a story. Results are ranked with the fewest words first, so the most natural phrases appear at the top. If you instead have a handful of tiles and want any word they can spell, the <a class="text-link underline-offset-2 hover:underline" href="/word-finder/">word finder</a> is the better fit.
+    </p>
+  </section>
+
+  <section>
+    <h2 class="heading-lg">Anagram examples worth studying</h2>
+    <p class="mt-4 text-base leading-7 text-body">
+      Good anagrams keep a link to the original. These all use exactly the same letters as the phrase beside them, and you can paste any of them into the box above to see them appear.
+    </p>
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full min-w-lg border-collapse text-left text-sm">
+        <caption class="sr-only">Anagram examples</caption>
+        <thead>
+          <tr class="border-b border-hairline">
+            <th scope="col" class="py-3 pr-4 eyebrow">Original</th>
+            <th scope="col" class="py-3 pr-4 eyebrow">Anagram</th>
+            <th scope="col" class="py-3 eyebrow">Why it works</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            examples.map((e) => (
+              <tr class="border-b border-hairline align-top">
+                <th scope="row" class="py-3 pr-4 font-semibold text-ink">{e.from}</th>
+                <td class="py-3 pr-4 text-ink">{e.to}</td>
+                <td class="py-3 text-body">{e.note}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="heading-lg">How to solve an anagram by hand</h2>
+    <p class="mt-4 text-base leading-7 text-body">
+      A solver is quickest, but these habits are what make you faster at puzzles, and they also help you judge the solver’s output.
+    </p>
+    <ol class="mt-5 list-decimal space-y-3 pl-6 text-base leading-7 text-body">
+      <li><strong class="text-ink">Write the letters in a circle or a row of tiles.</strong> Staring at them in the order they were given anchors your brain to the original word. Moving them breaks that spell.</li>
+      <li><strong class="text-ink">Look for common endings first.</strong> Groups such as -ING, -ED, -ER, -TION and -ES account for a lot of English words. Take them out and the remaining letters are often easier to read.</li>
+      <li><strong class="text-ink">Look for common beginnings.</strong> RE-, UN-, DE-, IN- and TH- pair up with many stems.</li>
+      <li><strong class="text-ink">Keep awkward letter pairs together.</strong> Q is nearly always followed by U, and pairs such as CH, SH, TH, PH and CK behave like one tile.</li>
+      <li><strong class="text-ink">Check the vowel balance.</strong> English words rarely run more than three consonants in a row. If you hold six consonants and two vowels, you probably need to split the answer into several words.</li>
+      <li><strong class="text-ink">Cross off as you go.</strong> Once you find a word that fits, strike its letters and solve what remains as a smaller puzzle.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2 class="heading-lg">Anagrams in cryptic crosswords</h2>
+    <p class="mt-4 text-base leading-7 text-body">
+      In a cryptic clue, an anagram has three parts: the letters to rearrange (the <em>fodder</em>), a word that signals rearranging (the <em>indicator</em>), and a plain definition of the answer. A short example:
+    </p>
+    <p class="mt-4 card p-4 text-base text-ink">
+      <em>Listen wildly to be quiet (6)</em>
+      <span class="mt-1 block text-sm text-body">“Listen” is the fodder, “wildly” signals a shuffle, and “to be quiet” defines the answer: <strong class="text-ink">SILENT</strong>.</span>
+    </p>
+    <p class="mt-4 text-base leading-7 text-body">
+      Indicators are usually words that suggest disorder or change: <em>broken, mixed, novel, drunk, awkward, rebuilt, out, off</em>. When you spot one, count the letters in the neighbouring word, check that the length matches the answer, and enter those letters above. Setters often use a phrase as fodder, so try a few ways of grouping the words.
+    </p>
+  </section>
+
+  <section>
+    <h2 class="heading-lg">Getting better results from the tool</h2>
+    <ul class="mt-5 list-disc space-y-3 pl-6 text-base leading-7 text-body">
+      <li><strong class="text-ink">Must Include</strong> forces a word into every result. Try a word tied to the theme you want.</li>
+      <li><strong class="text-ink">Never Include</strong> removes words that keep appearing but do not help.</li>
+      <li><strong class="text-ink">Min Word Length</strong> of 3 or 4 removes the tiny filler words that make results feel random.</li>
+      <li><strong class="text-ink">Common words only</strong> keeps everyday vocabulary. Turn it off for rare words, which is useful for hard crosswords.</li>
+      <li>Copy a result, star it for later, or use the share button to get a link that reopens the exact search.</li>
+    </ul>
+    <p class="mt-6 text-base leading-7 text-body">
+      To confirm that a pair you found elsewhere really matches, use the <a class="text-link underline-offset-2 hover:underline" href="/anagram-checker/">anagram checker</a>.
+    </p>
+  </section>
+</ToolLanding>

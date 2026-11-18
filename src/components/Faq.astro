@@ -85,15 +85,21 @@ export const faqs = [
     a: 'No. The dictionary is downloaded once and every search happens locally. History and favorites are stored only in your browser.',
   },
 ];
+
+interface Props {
+  items?: { q: string; a: string }[];
+  heading?: string;
+}
+const { items = faqs, heading = 'Questions, answered.' } = Astro.props;
 ---
 
 <section id="faq" class="scroll-mt-20 border-t border-hairline">
   <div class="mx-auto max-w-300 px-4 py-24 sm:px-6 md:py-32">
     <p class="eyebrow">FAQ</p>
-    <h2 class="heading-lg mt-3">Questions, answered.</h2>
+    <h2 class="heading-lg mt-3">{heading}</h2>
     <div class="mt-12 max-w-3xl divide-y divide-hairline border-y border-hairline">
       {
-        faqs.map((f) => (
+        items.map((f) => (
           <details class="group py-5">
             <summary class="flex cursor-pointer items-center justify-between gap-4 rounded-sm text-base font-medium text-ink select-none">
               {f.q}
@@ -110,6 +116,6 @@ export const faqs = [
   <script type="application/ld+json" is:inline set:html={JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+    mainEntity: items.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
   })} />
 </section>

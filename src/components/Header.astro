@@ -4,8 +4,9 @@ import { SITE } from '../config';
 const path = Astro.url.pathname;
 const links = [
   { href: '/#tool', label: 'Generator' },
-  { href: '/#features', label: 'Features' },
-  { href: '/#faq', label: 'FAQ' },
+  { href: '/anagram-solver/', label: 'Solver', wide: true },
+  { href: '/word-finder/', label: 'Word Finder', wide: true },
+  { href: '/anagram-checker/', label: 'Checker', wide: true },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
   { href: '/privacy', label: 'Privacy', wide: true },
@@ -24,7 +25,7 @@ const links = [
         links.map((l) => (
           <a
             href={l.href}
-            aria-current={path === l.href ? 'page' : undefined}
+            aria-current={path === l.href || path === `${l.href}/` ? 'page' : undefined}
             class:list={[
               'hidden rounded-full px-3 py-2 text-sm text-body transition-colors hover:bg-hairline-soft hover:text-ink aria-[current=page]:text-ink',
               l.wide ? 'lg:inline-block' : 'sm:inline-block',

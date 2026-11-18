@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Tool from './Tool.astro';
+import Faq from './Faq.astro';
+import { SITE } from '../config';
+import { TOOL_PAGES, absolute } from '../data/tools';
+
+interface Props {
+  mode: 'anagram' | 'words' | 'pair';
+  title: string;
+  description: string;
+  eyebrow: string;
+  h1: string;
+  intro: string;
+  faqs: { q: string; a: string }[];
+}
+
+const { mode, title, description, eyebrow, h1, intro, faqs } = Astro.props;
+const page = TOOL_PAGES.find((t) => t.mode === mode)!;
+const others = TOOL_PAGES.filter((t) => t.mode !== mode);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      name: `${page.name} · ${SITE.name}`,
+      description,
+      url: absolute(page.path),
+      applicationCategory: 'UtilitiesApplication',
+      operatingSystem: 'Any',
+      browserRequirements: 'Requires JavaScript',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: absolute('/') },
+        { '@type': 'ListItem', position: 2, name: page.name, item: absolute(page.path) },
+      ],
+    },
+  ],
+};
+---
+
+<Layout rawTitle={title} description={description} keywords={page.name.toLowerCase()} jsonLd={jsonLd}>
+  <section class="relative isolate overflow-hidden">
+    <div class="mesh pointer-events-none absolute inset-x-0 top-0 -z-10 h-[30rem]" aria-hidden="true"></div>
+    <div class="mx-auto max-w-300 px-4 pt-16 pb-16 sm:px-6 md:pt-20 md:pb-20">
+      <nav aria-label="Breadcrumb" class="mx-auto max-w-3xl text-center text-xs text-mute">
+        <a href="/" class="hover:text-ink">Home</a> <span aria-hidden="true">/</span> <span aria-current="page">{page.name}</span>
+      </nav>
+      <div class="mx-auto mt-6 max-w-3xl text-center">
+        <p class="eyebrow">{eyebrow}</p>
+        <h1 class="display-xl mt-4">{h1}</h1>
+        <p class="mx-auto mt-5 max-w-xl text-base leading-6 text-body">{intro}</p>
+      </div>
+      <div class="mx-auto mt-10 max-w-3xl">
+        <Tool defaultMode={mode} />
+      </div>
+    </div>
+  </section>
+
+  <article class="border-t border-hairline">
+    <div class="mx-auto max-w-3xl space-y-14 px-4 py-20 sm:px-6 md:py-24">
+      <slot />
+    </div>
+  </article>
+
+  <Faq items={faqs} heading="Common questions" />
+
+  <section class="border-t border-hairline">
+    <div class="mx-auto max-w-3xl px-4 py-20 sm:px-6">
+      <p class="eyebrow">More tools</p>
+      <h2 class="heading-lg mt-3">Related tools</h2>
+      <ul class="mt-6 grid gap-4 sm:grid-cols-2">
+        {
+          others.map((t) => (
+            <li class="card p-4">
+              <a class="text-sm font-semibold text-link underline-offset-2 hover:underline" href={t.path}>{t.name}</a>
+              <p class="mt-1 text-sm leading-6 text-body">{t.blurb}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Layout>
