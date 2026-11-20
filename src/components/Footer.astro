@@ -75,8 +75,13 @@ const groups = [
     </nav>
   </div>
   <div class="border-t border-hairline">
-    <p class="mx-auto max-w-300 px-4 py-6 text-xs text-mute sm:px-6">
-      © {year} <span translate="no">{SITE.name}</span>. Your text never leaves your browser.
-    </p>
+    <div class="mx-auto flex max-w-300 flex-wrap items-center justify-between gap-4 px-4 py-6 sm:px-6">
+      <p class="text-xs text-mute">
+        © {year} <span translate="no">{SITE.name}</span>. Your text never leaves your browser.
+      </p>
+      <a href="https://www.shipnlaunch.com/" target="_blank" rel="noopener noreferrer">
+        <img src="https://www.shipnlaunch.com/badges/featured-dark.svg" alt="Featured on ShipNLaunch" width="240" height="56" loading="lazy" />
+      </a>
+    </div>
   </div>
 </footer>
